@@ -44,7 +44,7 @@ class Motorcycle {
 
 	byte portD = 0;
 	byte lastReading = 0;
-	unsigned long portDDebounceTime = 0;
+	unsigned long portDDebounceTime = 10;
 	
 	int pinState2;
 	int pinState3;
