@@ -41,6 +41,11 @@ class Motorcycle {
 	long lastDebounceTime = 0;
 	int push = 0;
 	int tmpPush = 0;
+
+	byte portD = 0;
+	byte lastReading = 0;
+	unsigned long portDDebounceTime = 0;
+	
 	int pinState2;
 	int pinState3;
 	int pinState4;
@@ -85,6 +90,7 @@ public:
 
 	// functions
 	int getPushCombination();
+	byte getPortD();
 
 	// push functions
 	void leftPush();
