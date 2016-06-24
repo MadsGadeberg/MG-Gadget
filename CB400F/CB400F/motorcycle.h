@@ -15,10 +15,10 @@
 #define BLINK_PERIOD 1600
 
 // input pins
-#define brakeSwitch 2
-#define turnLeftSwitch 3
-#define turnRightSwitch 4
-#define hornSwitch 5
+#define turnLeftSwitch 2
+#define turnRightSwitch 3
+#define hornSwitch 4
+#define brakeSwitch 5
 #define configSwitch 6
 
 
@@ -32,8 +32,6 @@
 #define horn 19
 #define starter 18
 #define engineOn 17
-
-
 
 class Motorcycle {
 	// debounce functionality
