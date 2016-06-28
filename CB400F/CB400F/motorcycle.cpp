@@ -3,6 +3,7 @@
 
 // initializer
 Motorcycle::Motorcycle() {
+	/*
 	// setting ports as digital input
 	DDRD &= ~(1 << DDD0);	//turnLeft
 	DDRD &= ~(1 << DDD1);	//turnRight
@@ -20,13 +21,14 @@ Motorcycle::Motorcycle() {
 	DDRB |= 1 << DDB5;	// pin 15 - t19
 	DDRB |= 1 << DDB4;	// pin 16 - t18
 	DDRB |= 1 << DDB3;	// pin 17 - t17
-	/*
+	*/
+	///*
 	// for arduino testing
 	pinMode(turnLeftSwitch, INPUT);
 	pinMode(turnRightSwitch, INPUT);
 	pinMode(hornSwitch, INPUT);
 	pinMode(brakeSwitch, INPUT);
-	pinMode(configSwitch, INPUT);
+	pinMode(configSwitch, INPUT_PULLUP);
 
 	pinMode(positionLight, OUTPUT);
 	pinMode(lowBeam, OUTPUT);
@@ -36,73 +38,74 @@ Motorcycle::Motorcycle() {
 	pinMode(turnRight, OUTPUT);
 	pinMode(horn, OUTPUT);
 	pinMode(engineOn, OUTPUT);
-	*/
+	//*/
 }
 
 // reads a pin
 int Motorcycle::read(int pin) {
-	if (pin == 2) {
+	/*
+	if (pin == 0) {
+		// shifting values into register
+		shiftRegister0 = shiftRegister0 << 1;
+		if (digitalRead(0) == 1)
+			shiftRegister0 = shiftRegister0 | 1;
+
+		// setting state upon verified register
+		if (shiftRegister0 == 0x0)
+			pinState0 = 0;
+		else if (shiftRegister0 == 0xF)
+			pinState0 = 1;
+
+		return pinState0;
+	}
+	else if (pin == 1) {
+		// shifting values into register
+		shiftRegister1 = shiftRegister1 << 1;
+		if (digitalRead(1) == 1)
+			shiftRegister1 = shiftRegister1 | 1;
+
+		// setting state upon verified register
+		if (shiftRegister1 == 0x0)
+			pinState1 = 0;
+		else if (shiftRegister1 == 0xF)
+			pinState1 = 1;
+
+		return pinState1;
+	}
+	else if (pin == 2) {
 		// shifting values into register
 		shiftRegister2 = shiftRegister2 << 1;
 		if (digitalRead(2) == 1)
 			shiftRegister2 = shiftRegister2 | 1;
 
 		// setting state upon verified register
-		if (shiftRegister2 == 0x0)
+		if (shiftRegister2 == 0x0) {
 			pinState2 = 0;
-		else if (shiftRegister2 == 0xF)
+		}
+		else if (shiftRegister2 == 0xF) {
 			pinState2 = 1;
+		}
 
 		return pinState2;
 	}
-	else if (pin == 3) {
+	else if (pin == 3)
+	{
 		// shifting values into register
 		shiftRegister3 = shiftRegister3 << 1;
 		if (digitalRead(3) == 1)
 			shiftRegister3 = shiftRegister3 | 1;
 
 		// setting state upon verified register
-		if (shiftRegister3 == 0x0)
+		if (shiftRegister3 == 0x0) {
 			pinState3 = 0;
-		else if (shiftRegister3 == 0xF)
+		}
+		else if (shiftRegister3 == 0xF) {
 			pinState3 = 1;
+		}
 
 		return pinState3;
 	}
-	else if (pin == 4) {
-		// shifting values into register
-		shiftRegister4 = shiftRegister4 << 1;
-		if (digitalRead(4) == 1)
-			shiftRegister4 = shiftRegister4 | 1;
-
-		// setting state upon verified register
-		if (shiftRegister4 == 0x0) {
-			pinState4 = 0;
-		}
-		else if (shiftRegister4 == 0xF) {
-			pinState4 = 1;
-		}
-
-		return pinState4;
-	}
-	else if (pin == 5)
-	{
-		// shifting values into register
-		shiftRegister5 = shiftRegister5 << 1;
-		if (digitalRead(5) == 1)
-			shiftRegister5 = shiftRegister5 | 1;
-
-		// setting state upon verified register
-		if (shiftRegister5 == 0x0) {
-			pinState5 = 0;
-		}
-		else if (shiftRegister5 == 0xF) {
-			pinState5 = 1;
-		}
-
-		return pinState5;
-	}
-
+	*/
 	return digitalRead(pin);
 }
 // writes to pin
@@ -120,9 +123,9 @@ void Motorcycle::write(int pin, int bit) {
 	else if (pin == highBeam && bit == 0)
 		PORTC &= ~(1 << PORTC3);
 	//Brake
-	else if (pin == brakeSwitch && bit == 1)
+	else if (pin == brakeLight && bit == 1)
 		PORTC |= 1 << PORTC2;
-	else if (pin == brakeSwitch && bit == 0)
+	else if (pin == brakeLight && bit == 0)
 		PORTC &= ~(1 << PORTC2);
 	// blink L
 	else if (pin == turnLeft && bit == 1)
@@ -144,7 +147,7 @@ void Motorcycle::write(int pin, int bit) {
 		PORTB |= 1 << PORTB4;
 	else if (pin == starter && bit == 0)
 		PORTB &= ~(1 << PORTB4);
-	// engine stop
+	// engine on
 	else if (pin == engineOn && bit == 1)
 		PORTB |= 1 << PORTB3;
 	else if (pin == engineOn && bit == 0)
@@ -188,11 +191,12 @@ void Motorcycle::leftPush() {
 			beamToggle();
 }
 void Motorcycle::leftHold() {
-	if (systemState)
+	if (systemState) {
 		if (configSwitch)
 			beamToggle();
 		else if (!configSwitch)
 			turnLeftToggle();
+	}
 	else if (!systemState)
 		positionLightToggle();
 }
@@ -310,44 +314,56 @@ void Motorcycle::systemOnBlinkSequence()
 	// blink 2 times
 	write(turnLeft, 1);
 	write(turnRight, 1);
+	write(lowBeam, 1);
 	delay(200);
 	write(turnLeft, 0);
 	write(turnRight, 0);
+	write(lowBeam, 0);
 	delay(200);
 	write(turnLeft, 1);
 	write(turnRight, 1);
+	write(lowBeam, 1);
 	delay(200);
 	write(turnLeft, 0);
 	write(turnRight, 0);
+	write(lowBeam, 0);
 }
 void Motorcycle::systemOffBlinkSequence(){
 	// blink 3 times
 	write(turnLeft, 1);
 	write(turnRight, 1);
+	write(lowBeam, 1);
 	delay(200);
 	write(turnLeft, 0);
 	write(turnRight, 0);
+	write(lowBeam, 0);
 	delay(200);
 	write(turnLeft, 1);
 	write(turnRight, 1);
+	write(lowBeam, 1);
 	delay(200);
 	write(turnLeft, 0);
 	write(turnRight, 0);
+	write(lowBeam, 0);
 	delay(200);
 	write(turnLeft, 1);
 	write(turnRight, 1);
+	write(lowBeam, 1);
 	delay(200);
 	write(turnLeft, 0);
 	write(turnRight, 0);
+	write(lowBeam, 0);
 }
 
 void Motorcycle::updateOutput() {
 	// engine on/off
 	if (systemState) {
-		if (engineKilled + 5000 > millis())
+		if (engineKilled + 5000 > millis()) {
 			write(engineOn, 0);
-		else
+		}
+		else {
 			write(engineOn, 1);
+		}
 	}
 	else if (!systemState) {
 		write(engineOn, 0);
@@ -376,7 +392,10 @@ void Motorcycle::updateOutput() {
 	}
 
 	// brakeLight
-	write(brakeLight, read(brakeSwitch));
+	if (read(brakeSwitch) && systemState)
+		write(brakeLight, 1);
+	else
+		write(brakeLight, 0);
 	
 	// Turn Left
 	if (turnLeftState){
