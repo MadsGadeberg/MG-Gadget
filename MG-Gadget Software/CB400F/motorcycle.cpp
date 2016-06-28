@@ -43,69 +43,6 @@ Motorcycle::Motorcycle() {
 
 // reads a pin
 int Motorcycle::read(int pin) {
-	/*
-	if (pin == 0) {
-		// shifting values into register
-		shiftRegister0 = shiftRegister0 << 1;
-		if (digitalRead(0) == 1)
-			shiftRegister0 = shiftRegister0 | 1;
-
-		// setting state upon verified register
-		if (shiftRegister0 == 0x0)
-			pinState0 = 0;
-		else if (shiftRegister0 == 0xF)
-			pinState0 = 1;
-
-		return pinState0;
-	}
-	else if (pin == 1) {
-		// shifting values into register
-		shiftRegister1 = shiftRegister1 << 1;
-		if (digitalRead(1) == 1)
-			shiftRegister1 = shiftRegister1 | 1;
-
-		// setting state upon verified register
-		if (shiftRegister1 == 0x0)
-			pinState1 = 0;
-		else if (shiftRegister1 == 0xF)
-			pinState1 = 1;
-
-		return pinState1;
-	}
-	else if (pin == 2) {
-		// shifting values into register
-		shiftRegister2 = shiftRegister2 << 1;
-		if (digitalRead(2) == 1)
-			shiftRegister2 = shiftRegister2 | 1;
-
-		// setting state upon verified register
-		if (shiftRegister2 == 0x0) {
-			pinState2 = 0;
-		}
-		else if (shiftRegister2 == 0xF) {
-			pinState2 = 1;
-		}
-
-		return pinState2;
-	}
-	else if (pin == 3)
-	{
-		// shifting values into register
-		shiftRegister3 = shiftRegister3 << 1;
-		if (digitalRead(3) == 1)
-			shiftRegister3 = shiftRegister3 | 1;
-
-		// setting state upon verified register
-		if (shiftRegister3 == 0x0) {
-			pinState3 = 0;
-		}
-		else if (shiftRegister3 == 0xF) {
-			pinState3 = 1;
-		}
-
-		return pinState3;
-	}
-	*/
 	return digitalRead(pin);
 }
 // writes to pin
