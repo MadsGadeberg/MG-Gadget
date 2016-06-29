@@ -39,22 +39,19 @@ class Motorcycle {
 	long lastDebounceTime = 0;
 	int push = 0;
 	int tmpPush = 0;
-<<<<<<< HEAD:MG-Gadget Software/CB400F/motorcycle.h
+
+
 	int pinState0;
 	int pinState1;
-=======
-
-	byte portD = 0;
-	byte lastReading = 0;
-	unsigned long portDDebounceTime = 10;
-	
->>>>>>> feature/Custom_Locks:CB400F/CB400F/motorcycle.h
 	int pinState2;
 	int pinState3;
 	byte shiftRegister0;
 	byte shiftRegister1;
 	byte shiftRegister2;
 	byte shiftRegister3;
+	byte portD = 0;
+	byte lastReading = 0;
+	unsigned long portDDebounceTime = 10;
 
 	// states
 	int systemState = 0, engineKillState;
