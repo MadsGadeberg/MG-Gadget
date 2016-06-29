@@ -40,7 +40,6 @@ class Motorcycle {
 	int push = 0;
 	int tmpPush = 0;
 
-
 	int pinState0;
 	int pinState1;
 	int pinState2;

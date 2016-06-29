@@ -19,6 +19,9 @@ void setup() {
 void loop() {
 	int push = mc.getPushCombination();
 
+	byte portD = mc.getPortD();
+
+
 	leftPush(push);
 	rightPush(push);
 	leftAndRightPush(push);
