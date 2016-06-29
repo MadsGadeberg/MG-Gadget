@@ -122,16 +122,16 @@ int Motorcycle::getPushCombination() {
 // Push functions
 void Motorcycle::leftPush() {
 	if (systemState && mainLightsState)
-		if (configSwitch)
+		if (read(configSwitch))
 			turnLeftToggle();
-		else if (!configSwitch)
+		else if (!read(configSwitch))
 			beamToggle();
 }
 void Motorcycle::leftHold() {
 	if (systemState) {
-		if (configSwitch)
+		if (read(configSwitch))
 			beamToggle();
-		else if (!configSwitch)
+		else if (!read(configSwitch))
 			turnLeftToggle();
 	}
 	else if (!systemState)
@@ -139,16 +139,16 @@ void Motorcycle::leftHold() {
 }
 void Motorcycle::rightPush() {
 	if (systemState && mainLightsState)
-		if (configSwitch)
+		if (read(configSwitch))
 			turnRightToggle();
-		else if (!configSwitch)
+		else if (!read(configSwitch))
 			mainLightsToggle();
 }
 void Motorcycle::rightHold() {
 	if (systemState)
-		if (configSwitch)
+		if (read(configSwitch))
 			mainLightsToggle();
-		else if (!configSwitch)
+		else if (!read(configSwitch))
 			turnRightToggle();
 }
 void Motorcycle::leftAndRightPush() {}
@@ -251,45 +251,35 @@ void Motorcycle::systemOnBlinkSequence()
 	// blink 2 times
 	write(turnLeft, 1);
 	write(turnRight, 1);
-	write(lowBeam, 1);
-	delay(200);
+	delay(100);
 	write(turnLeft, 0);
 	write(turnRight, 0);
-	write(lowBeam, 0);
-	delay(200);
+	delay(100);
 	write(turnLeft, 1);
 	write(turnRight, 1);
-	write(lowBeam, 1);
-	delay(200);
+	delay(100);
 	write(turnLeft, 0);
 	write(turnRight, 0);
-	write(lowBeam, 0);
 }
 void Motorcycle::systemOffBlinkSequence(){
 	// blink 3 times
 	write(turnLeft, 1);
 	write(turnRight, 1);
-	write(lowBeam, 1);
-	delay(200);
+	delay(100);
 	write(turnLeft, 0);
 	write(turnRight, 0);
-	write(lowBeam, 0);
-	delay(200);
+	delay(100);
 	write(turnLeft, 1);
 	write(turnRight, 1);
-	write(lowBeam, 1);
-	delay(200);
+	delay(100);
 	write(turnLeft, 0);
 	write(turnRight, 0);
-	write(lowBeam, 0);
-	delay(200);
+	delay(100);
 	write(turnLeft, 1);
 	write(turnRight, 1);
-	write(lowBeam, 1);
-	delay(200);
+	delay(100);
 	write(turnLeft, 0);
 	write(turnRight, 0);
-	write(lowBeam, 0);
 }
 
 void Motorcycle::updateOutput() {

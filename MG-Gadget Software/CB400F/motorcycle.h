@@ -14,15 +14,15 @@
 #define HOLDTIME 250
 #define BLINK_PERIOD 1600
 
-// input pins
-#define turnLeftSwitch 4
-#define turnRightSwitch 5
-#define hornSwitch 2
-#define brakeSwitch 3
+// input pins NOTE IT IS PINS!!!
+#define turnLeftSwitch 2
+#define turnRightSwitch 3
+#define hornSwitch 4
+#define brakeSwitch 5
 #define configSwitch 6
 
 
-// output pins
+// output terminals NOTE IT IS THE 328 Terminals instead! Fix will later be added
 #define positionLight 28
 #define lowBeam 27
 #define highBeam 26
