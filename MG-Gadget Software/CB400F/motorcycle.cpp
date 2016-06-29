@@ -119,6 +119,21 @@ int Motorcycle::getPushCombination() {
 	return push;
 }
 
+// gets the filteret input values of portD
+byte Motorcycle::getPortD() {
+	byte newReading = PORTD & 0x0F;
+
+	if (newReading != lastReading)
+		portDDebounceTime = millis();
+
+	if ((portDDebounceTime + debounceDelay) < millis()) {
+		if (newReading != portD)
+			portD = newReading;
+	}
+
+	return portD;
+}
+
 // Push functions
 void Motorcycle::leftPush() {
 	if (systemState && mainLightsState)

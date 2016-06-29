@@ -41,6 +41,7 @@ class Motorcycle {
 	int tmpPush = 0;
 	int pinState0;
 	int pinState1;
+
 	int pinState2;
 	int pinState3;
 	byte shiftRegister0;
@@ -83,6 +84,7 @@ public:
 
 	// functions
 	int getPushCombination();
+	byte getPortD();
 
 	// push functions
 	void leftPush();
