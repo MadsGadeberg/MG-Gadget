@@ -3,23 +3,13 @@
 
 // initializer
 Motorcycle::Motorcycle() {
-	// for arduino testing
-	pinMode(2, INPUT);
-	pinMode(3, INPUT);
-	pinMode(4, OUTPUT);
-	pinMode(5, OUTPUT);
-	pinMode(6, OUTPUT);
-	pinMode(13, OUTPUT);
-	
 	/*
 	// setting ports as digital input
-	DDRD &= ~(1 << DDD0);	//brake
-	DDRD &= ~(1 << DDD1);	//turnLeft
-	DDRD &= ~(1 << DDD2);	//turnRight
-	DDRD &= ~(1 << DDD3);	//Horn
-	DDRD &= ~(1 << DDD4);	//starter
-	DDRB &= ~(1 << DDB6);	//Enginekill
-	DDRB &= ~(1 << DDB7);	//disp
+	DDRD &= ~(1 << DDD0);	//turnLeft
+	DDRD &= ~(1 << DDD1);	//turnRight
+	DDRD &= ~(1 << DDD2);	//Horn
+	DDRD &= ~(1 << DDD3);	//Brake
+	DDRD &= ~(1 << DDD4);	//ConfigSwitch
 
 	// setting ports as digital out
 	DDRC |= 1 << DDC5;	// pin 9 - t28
@@ -28,105 +18,76 @@ Motorcycle::Motorcycle() {
 	DDRC |= 1 << DDC2;	// pin 12 - t25
 	DDRC |= 1 << DDC1;	// pin 13 - t24
 	DDRC |= 1 << DDC0;	// pin 14 - t23
-	DDRB |= 1 << DDB5;	// pin 15 - SCK - t19
-	DDRB |= 1 << DDB4;	// pin 16 - MISO - t18
-	DDRB |= 1 << DDB3;	// pin 17 - MOSI - t17
+	DDRB |= 1 << DDB5;	// pin 15 - t19
+	DDRB |= 1 << DDB4;	// pin 16 - t18
+	DDRB |= 1 << DDB3;	// pin 17 - t17
 	*/
+	///*
+	// for arduino testing
+	pinMode(turnLeftSwitch, INPUT);
+	pinMode(turnRightSwitch, INPUT);
+	pinMode(hornSwitch, INPUT);
+	pinMode(brakeSwitch, INPUT);
+	pinMode(configSwitch, INPUT_PULLUP);
+
+	pinMode(positionLight, OUTPUT);
+	pinMode(lowBeam, OUTPUT);
+	pinMode(highBeam, OUTPUT);
+	pinMode(brakeLight, OUTPUT);
+	pinMode(turnLeft, OUTPUT);
+	pinMode(turnRight, OUTPUT);
+	pinMode(horn, OUTPUT);
+	pinMode(engineOn, OUTPUT);
+	//*/
 }
 
 // reads a pin
 int Motorcycle::read(int pin) {
-	if (pin == 2) {
-		// shifting values into register
-		shiftRegister2 = shiftRegister2 << 1;
-		if (digitalRead(0) == 1)
-			shiftRegister2 = shiftRegister2 | 1;
-
-		// setting state upon verified register
-		if (shiftRegister2 == 0x0)
-			pinState2 = 0;
-		else if (shiftRegister2 == 0xF)
-			pinState2 = 1;
-
-		return pinState2;
-	}
-	else if (pin == 3) {
-		// shifting values into register
-		shiftRegister3 = shiftRegister3 << 1;
-		if (digitalRead(1) == 1)
-			shiftRegister3 = shiftRegister3 | 1;
-
-		// setting state upon verified register
-		if (shiftRegister3 == 0x0)
-			pinState3 = 0;
-		else if (shiftRegister3 == 0xF)
-			pinState3 = 1;
-
-		return pinState3;
-	}
-	else if (pin == 4) {
-		// shifting values into register
-		shiftRegister3 = shiftRegister3 << 1;
-		if (digitalRead(2) == 1)
-			shiftRegister3 = shiftRegister3 | 1;
-
-		// setting state upon verified register
-		if (shiftRegister3 == 0x0) {
-			pinState3 = 0;
-		}
-		else if (shiftRegister3 == 0xF) {
-			pinState3 = 1;
-		}
-
-		return pinState3;
-	}
-	else if (pin == 5)
-
 	return digitalRead(pin);
 }
 // writes to pin
 void Motorcycle::write(int pin, int bit) {
-	if (pin == 28 && bit == 1)
+	if (pin == positionLight && bit == 1)
 		PORTC |= 1 << PORTC5;
-	else if (pin == 28 && bit == 0)
+	else if (pin == positionLight && bit == 0)
 		PORTC &= ~(1 << PORTC5);
-	else if (pin == 27 && bit == 1)
+	else if (pin == lowBeam && bit == 1)
 		PORTC |= 1 << PORTC4;
-	else if (pin == 27 && bit == 0)
+	else if (pin == lowBeam && bit == 0)
 		PORTC &= ~(1 << PORTC4);
-	else if (pin == 26 && bit == 1)
+	else if (pin == highBeam && bit == 1)
 		PORTC |= 1 << PORTC3;
-	else if (pin == 26 && bit == 0)
+	else if (pin == highBeam && bit == 0)
 		PORTC &= ~(1 << PORTC3);
 	//Brake
-	else if (pin == 25 && bit == 1)
+	else if (pin == brakeLight && bit == 1)
 		PORTC |= 1 << PORTC2;
-	else if (pin == 25 && bit == 0)
+	else if (pin == brakeLight && bit == 0)
 		PORTC &= ~(1 << PORTC2);
 	// blink L
-	else if (pin == 24 && bit == 1)
+	else if (pin == turnLeft && bit == 1)
 		PORTC |= 1 << PORTC1;
-	else if (pin == 24 && bit == 0)
+	else if (pin == turnLeft && bit == 0)
 		PORTC &= ~(1 << PORTC1);
 	// blink R
-	else if (pin == 23 && bit == 1)
+	else if (pin == turnRight && bit == 1)
 		PORTC |= 1 << PORTC0;
-	else if (pin == 23 && bit == 0)
+	else if (pin == turnRight && bit == 0)
 		PORTC &= ~(1 << PORTC0);
 	// Horn
-	else if (pin == 19 && bit == 1)
+	else if (pin == horn && bit == 1)
 		PORTB |= 1 << PORTB5;
-	else if (pin == 19 && bit == 0)
+	else if (pin == horn && bit == 0)
 		PORTB &= ~(1 << PORTB5);
 	// start
-	else if (pin == 18 && bit == 1)
+	else if (pin == starter && bit == 1)
 		PORTB |= 1 << PORTB4;
-	else if (pin == 18 && bit == 0)
+	else if (pin == starter && bit == 0)
 		PORTB &= ~(1 << PORTB4);
-	// engine stop
-	else if (pin == 17 && bit == 1)
+	// engine on
+	else if (pin == engineOn && bit == 1)
 		PORTB |= 1 << PORTB3;
-	else if (pin == 17 && bit == 0)
+	else if (pin == engineOn && bit == 0)
 		PORTB &= ~(1 << PORTB3);
 }
 
@@ -161,32 +122,33 @@ int Motorcycle::getPushCombination() {
 // Push functions
 void Motorcycle::leftPush() {
 	if (systemState && mainLightsState)
-		if (configSwitch)
+		if (read(configSwitch))
 			turnLeftToggle();
-		else if (!configSwitch)
+		else if (!read(configSwitch))
 			beamToggle();
 }
 void Motorcycle::leftHold() {
-	if (systemState)
-		if (configSwitch)
+	if (systemState) {
+		if (read(configSwitch))
 			beamToggle();
-		else if (!configSwitch)
+		else if (!read(configSwitch))
 			turnLeftToggle();
+	}
 	else if (!systemState)
 		positionLightToggle();
 }
 void Motorcycle::rightPush() {
 	if (systemState && mainLightsState)
-		if (configSwitch)
+		if (read(configSwitch))
 			turnRightToggle();
-		else if (!configSwitch)
+		else if (!read(configSwitch))
 			mainLightsToggle();
 }
 void Motorcycle::rightHold() {
 	if (systemState)
-		if (configSwitch)
+		if (read(configSwitch))
 			mainLightsToggle();
-		else if (!configSwitch)
+		else if (!read(configSwitch))
 			turnRightToggle();
 }
 void Motorcycle::leftAndRightPush() {}
@@ -289,13 +251,13 @@ void Motorcycle::systemOnBlinkSequence()
 	// blink 2 times
 	write(turnLeft, 1);
 	write(turnRight, 1);
-	delay(200);
+	delay(100);
 	write(turnLeft, 0);
 	write(turnRight, 0);
-	delay(200);
+	delay(100);
 	write(turnLeft, 1);
 	write(turnRight, 1);
-	delay(200);
+	delay(100);
 	write(turnLeft, 0);
 	write(turnRight, 0);
 }
@@ -303,19 +265,19 @@ void Motorcycle::systemOffBlinkSequence(){
 	// blink 3 times
 	write(turnLeft, 1);
 	write(turnRight, 1);
-	delay(200);
+	delay(100);
 	write(turnLeft, 0);
 	write(turnRight, 0);
-	delay(200);
+	delay(100);
 	write(turnLeft, 1);
 	write(turnRight, 1);
-	delay(200);
+	delay(100);
 	write(turnLeft, 0);
 	write(turnRight, 0);
-	delay(200);
+	delay(100);
 	write(turnLeft, 1);
 	write(turnRight, 1);
-	delay(200);
+	delay(100);
 	write(turnLeft, 0);
 	write(turnRight, 0);
 }
@@ -323,13 +285,15 @@ void Motorcycle::systemOffBlinkSequence(){
 void Motorcycle::updateOutput() {
 	// engine on/off
 	if (systemState) {
-		if (engineKilled + 5000 > millis())
+		if (engineKilled + 5000 > millis()) {
 			write(engineOn, 0);
-		else
+		}
+		else {
 			write(engineOn, 1);
+		}
 	}
 	else if (!systemState) {
-		digitalWrite(engineOn, 0);
+		write(engineOn, 0);
 	}
 
 	// PositionLight
@@ -355,23 +319,26 @@ void Motorcycle::updateOutput() {
 	}
 
 	// brakeLight
-	write(brakeLight, read(brakeSwitch));
+	if (read(brakeSwitch) && systemState)
+		write(brakeLight, 1);
+	else
+		write(brakeLight, 0);
 	
 	// Turn Left
 	if (turnLeftState){
 		int turnTime = millis() - turnTimeStamp;
 		int turnBit = (turnTime % BLINK_PERIOD) < (BLINK_PERIOD/2) ? 1 : 0;
-		digitalWrite(turnLeft, turnBit);
+		write(turnLeft, turnBit);
 	} else
-		digitalWrite(turnLeft, 0);
+		write(turnLeft, 0);
 		
 	// Turn Right
 	if (turnRightState){
 		int turnTime = millis() - turnTimeStamp;
 		int turnBit = (turnTime % BLINK_PERIOD) < (BLINK_PERIOD/2) ? 1 : 0;
-		digitalWrite(turnRight, turnBit);
+		write(turnRight, turnBit);
 	} else
-		digitalWrite(turnRight, 0);
+		write(turnRight, 0);
 		
 	// horn
 	write(horn, hornSwitch);

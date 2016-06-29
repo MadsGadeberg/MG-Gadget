@@ -14,15 +14,15 @@
 #define HOLDTIME 250
 #define BLINK_PERIOD 1600
 
-// input pins
-#define brakeSwitch 2
-#define turnLeftSwitch 3
-#define turnRightSwitch 4
-#define hornSwitch 5
+// input pins NOTE IT IS PINS!!!
+#define turnLeftSwitch 2
+#define turnRightSwitch 3
+#define hornSwitch 4
+#define brakeSwitch 5
 #define configSwitch 6
 
 
-// output pins
+// output terminals NOTE IT IS THE 328 Terminals instead! Fix will later be added
 #define positionLight 28
 #define lowBeam 27
 #define highBeam 26
@@ -33,22 +33,20 @@
 #define starter 18
 #define engineOn 17
 
-
-
 class Motorcycle {
 	// debounce functionality
 	long debounceDelay = 10;
 	long lastDebounceTime = 0;
 	int push = 0;
 	int tmpPush = 0;
+	int pinState0;
+	int pinState1;
 	int pinState2;
 	int pinState3;
-	int pinState4;
-	int pinState5;
+	byte shiftRegister0;
+	byte shiftRegister1;
 	byte shiftRegister2;
 	byte shiftRegister3;
-	byte shiftRegister4;
-	byte shiftRegister5;
 
 	// states
 	int systemState = 0, engineKillState;
