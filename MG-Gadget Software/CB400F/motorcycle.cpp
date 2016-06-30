@@ -153,11 +153,14 @@ void Motorcycle::leftHold() {
 		positionLightToggle();
 }
 void Motorcycle::rightPush() {
-	if (systemState && mainLightsState)
+	if (systemState) {
 		if (read(configSwitch))
 			turnRightToggle();
-		else if (!read(configSwitch))
+		else if (!read(configSwitch)) {
 			mainLightsToggle();
+			Serial.println("hej");
+		}
+	}
 }
 void Motorcycle::rightHold() {
 	if (systemState)
@@ -356,5 +359,6 @@ void Motorcycle::updateOutput() {
 		write(turnRight, 0);
 		
 	// horn
-	write(horn, hornSwitch);
+	if (systemState)
+		write(horn, read(hornSwitch));
 }
