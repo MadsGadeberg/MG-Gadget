@@ -348,10 +348,11 @@ UsedLibrary="/Applications/EAGLE-7.6.0/lbr/xilinx-xcv.lbr"
 UsedLibrary="/Applications/EAGLE-7.6.0/lbr/zetex.lbr"
 UsedLibrary="/Applications/EAGLE-7.6.0/lbr/zilog.lbr"
 UsedLibrary="/Applications/EAGLE-7.6.0/lbr/Mads/MG-Gadget Shield.lbr"
+UsedLibrary="/Applications/EAGLE-7.6.0/lbr/elektro/e-symbole.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="372 236 971 635"
+Loc="848 187 1447 586"
 State=2
 Number=0
 
