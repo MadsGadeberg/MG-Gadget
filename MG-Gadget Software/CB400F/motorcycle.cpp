@@ -158,7 +158,6 @@ void Motorcycle::rightPush() {
 			turnRightToggle();
 		else if (!read(configSwitch)) {
 			mainLightsToggle();
-			Serial.println("hej");
 		}
 	}
 }
@@ -194,7 +193,7 @@ void Motorcycle::powerOn() {
 	highBeamState = 0;
 	mainLightsState = 1;
 	positionLightState = 0;
-	Serial.println("System on");
+	//Serial.println("System on");
 }
 void Motorcycle::powerOff() {
 	systemOffBlinkSequence();
@@ -204,65 +203,65 @@ void Motorcycle::powerOff() {
 	highBeamState = 0;
 	mainLightsState = 0;
 	positionLightState = 0;
-	Serial.println("System off");
+	//Serial.println("System off");
 }
 void Motorcycle::turnLeftToggle() {
 	if (turnLeftState) {
 		turnLeftState = 0;
-		Serial.println("Left off");
+		//Serial.println("Left off");
 	}
 	else if (!turnLeftState && !turnRightState) {
 		turnLeftState = 1;
 		turnTimeStamp = millis();
-		Serial.println("Left on");
+		//Serial.println("Left on");
 	}
 }
 void Motorcycle::turnRightToggle() {
 	if (!turnRightState && !turnLeftState){
 		turnRightState = 1;
-		Serial.println("Right on");
+		//Serial.println("Right on");
 	}
 	else if (turnRightState){
 		turnRightState = 0;
-		Serial.println("Right off");
+		//Serial.println("Right off");
 	}
 }
 void Motorcycle::beamToggle() {	
 	if (!highBeamState && mainLightsState){
 		highBeamState = 1;
-		Serial.println("Beam On");
+		//Serial.println("Beam On");
 	} else if (highBeamState && mainLightsState){
 		highBeamState = 0;
-		Serial.println("Beam Off");
+		//Serial.println("Beam Off");
 	}
 }
 void Motorcycle::mainLightsToggle() {
 	if (!mainLightsState) {
 		mainLightsState = 1;
-		Serial.println("Main lights on");
+		//Serial.println("Main lights on");
 	}
 	else{
 		mainLightsState = 0;
 		highBeamState = 0;
 		turnLeftState = 0;
 		turnRightState = 0;
-		Serial.println("Main lights off");
+		//Serial.println("Main lights off");
 	}
 }
 void Motorcycle::positionLightToggle() {
 	if (!positionLightState) {
 		positionLightState = 1;
-		Serial.println("pos On");
+		//Serial.println("pos On");
 	}
 	else {
 		positionLightState = 0;
-		Serial.println("pos off");
+		//Serial.println("pos off");
 	}
 }
 void Motorcycle::engineKill() {
 	// not implemented
 	engineKilled = millis();
-	Serial.println("Engine kill");
+	//Serial.println("Engine kill");
 }
 void Motorcycle::systemOnBlinkSequence()
 {

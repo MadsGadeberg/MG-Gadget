@@ -15,11 +15,11 @@
 #define BLINK_PERIOD 1600
 
 // input pins NOTE IT IS PINS!!!
-#define turnLeftSwitch 2
-#define turnRightSwitch 3
-#define hornSwitch 4
-#define brakeSwitch 5
-#define configSwitch 6
+#define turnLeftSwitch 0
+#define turnRightSwitch 1
+#define hornSwitch 2
+#define brakeSwitch 3
+#define configSwitch 4
 
 
 // output terminals NOTE IT IS THE 328 Terminals instead! Fix will later be added
@@ -32,6 +32,7 @@
 #define horn 19
 #define starter 18
 #define engineOn 17
+#define AUX 16
 
 class Motorcycle {
 	// debounce functionality
