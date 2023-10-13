@@ -1,28 +1,24 @@
-# MG-Gadget
-
-
-Danish README
-Funktioner som controlleren har.
+English README
+Features that the controller has.
 Lock/unlock
-Motorcyklen kan låses og låses op ved hjælp af tastekombinationer med højre og venstre trykknap.
-For at låse motorcyklen op/ tænde motorcyklen trykkes begge knapperne ned hvorefter den højre slippes efterfulgt af begge knapper igen trykkes ned.
-For at låse motorcyklen bruges overnævnte kombination bare spejlvendt. Det vil sige den venstre slippes og trykkes. Disse kombinationer ændres selvfølgelig før den endelige version.
+The motorcycle can be locked and unlocked using key combinations with the right and left push buttons.
+To unlock/turn on the motorcycle, press both buttons down, then release the right one, followed by pressing both buttons down again.
+To lock the motorcycle, use the aforementioned combination in reverse. That is, release and press the left button. These combinations will of course be changed before the final version.
 
-Ved tænd/sluk blinker blinklysene med forskelligt antal så man får en bekræftelse på om motorcyklen er slukket eller tændt.
+When turning on/off, the turn signals blink with different numbers of flashes, providing confirmation whether the motorcycle is off or on.
 
+Both the right and left buttons have 2 different functions depending on whether you press them or hold them down. These functions can be inverted by using the "config0" port. This is useful if, for example, you have a motorcycle without turn signals. Then you would like to have some other functions upon a normal press instead of the turn signals.
 
-Både højre og venstre knap har 2 forskellige funktioner alt efter om man trykker på den eller holder den nede. Disse funktioner kan inverteres ved brug af "config0" porten. Dette er nyttigt hvis man for eksempel har en motorcykel uden blinklys. Så vil man gerne have nogle andre funktioner ved almindeligt tryk i stedet for blinklys.
+Left push button
+A press turns the driving light off/on.
+Holding the button down triggers the blinkers.
+These functions can be inverted by setting the "config0" port to plus.
+If the motorcycle is off, the position light can be turned on by holding down the left push button.
 
-Venstre trykknap
-Ved tryk slukker/tænder man kørelyset.
-Ved at holde knappen nede blinkes der.
-Disse funktioner kan inverteres ved at Sætte "config0" porten til plus.
-Hvis motorcyklen er slukket kan positionslyset tændes ved at holde venstre trykknap inde.
+Right push button
+A press switches between low/high beam.
+Holding the button down activates the blinkers.
+These functions can also be inverted by setting the "config0" port to plus.
 
-Højre trykknap
-Ved tryk skiftes imellem kort/langt lys.
-Ved at holde knappen nede blinkes der.
-Disse funktioner kan ligeledes inverteres ved at Sætte "config0" porten til plus
-
-Højre og Venstre
-Ved tryk på begge knapper slukkes spændingen til tændspolerne i 5 sekunder. "Engine Kill"
+Right and Left
+Pressing both buttons cuts the power to the ignition coils for 5 seconds. "Engine Kill"
